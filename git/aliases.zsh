@@ -17,3 +17,17 @@ alias gco='git checkout'
 alias gcb='git copy-branch-name'
 alias gb='git branch'
 alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
+
+alias gs='git status'
+alias gds='git diff --staged'
+alias gdh='git diff HEAD'
+alias gpl='git pull'
+alias gl='git log --graph'
+alias gundoc="git reset --soft 'HEAD^'"
+alias gclear='git reset --hard'
+alias gcop='git checkout HEAD~1'
+alias gcon='git_next'
+alias gsts='git stash save'
+alias gstp='git stash pop'
+alias gsta='git stash apply'
+alias gstl='git stash list'
