@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Git stash & pull & pop stash & commit
+# Probably not a good idea to automate this, on second thought
+# TODO: test more thoroughly
+
+function git-update-from-remote-using-stash-then-commit {
+  git-update-from-remote-using-stash
+
+  echo "Commit..."
+  git commit "$@"
+  committed=$?
+
+  echo "Status..."
+  git status
+
+  test $committed -eq 0 && echo "Press Enter to push, or Ctrl+C to cancel" && read && git push
+}

@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# Git stash & pull & pop stash
+# Update from remote -- stash any changes, pull new commits, pop stash
+# TODO: test more thoroughly
+
+function git-update-from-remote-using-stash {
+  echo "Stash save..."
+  git stash | grep "No local changes to save" > /dev/null
+  stashed=$?
+  test $stashed -eq 0 && echo "Nothing to stash"
+  test $stashed -ne 0 && echo "Stash saved"
+
+  echo "Pull..."
+  git pull
+
+  test $stashed -ne 0 && echo "Stash pop..." && git stash pop && echo "Stash pop'd"
+}

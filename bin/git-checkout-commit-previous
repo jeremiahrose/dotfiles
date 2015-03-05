@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Checkout previous (older) commit
+# TODO: test more thoroughly
+
+git checkout HEAD~1
