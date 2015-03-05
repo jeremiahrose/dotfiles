@@ -8,6 +8,8 @@ else
   ls_bin="ls"
 fi
 
+alias '#'=':||' # Replace hash with universal comment for zsh compatibiliy (use "# foo")
+
 alias ls="$ls_bin -F --color"
 alias l="$ls_bin -lAh --color"
 alias ll="$ls_bin -l --color"
