@@ -17,3 +17,6 @@ alias als='alsamixer'
 
 alias hideme='history -d $((HISTCMD-1))' # Or just prefix a command with a space =P
 alias hideprev='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
+
+alias gooch='google-chrome'
+alias gcgpu='google-chrome-with-gpu'
