@@ -15,6 +15,8 @@ alias l="$ls_bin -lAh --color"
 alias ll="$ls_bin -l --color"
 alias la="$ls_bin -A --color"
 
+alias '..'='cd ..'
+
 alias als='alsamixer'
 
 alias hideme='history -d $((HISTCMD-1))' # Or just prefix a command with a space =P
