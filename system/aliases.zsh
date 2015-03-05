@@ -3,8 +3,17 @@
 #   `brew install coreutils`
 if $(gls &>/dev/null)
 then
-  alias ls="gls -F --color"
-  alias l="gls -lAh --color"
-  alias ll="gls -l --color"
-  alias la='gls -A --color'
+  ls_bin="gls"
+else
+  ls_bin="ls"
 fi
+
+alias ls="$ls_bin -F --color"
+alias l="$ls_bin -lAh --color"
+alias ll="$ls_bin -l --color"
+alias la="$ls_bin -A --color"
+
+alias als='alsamixer'
+
+alias hideme='history -d $((HISTCMD-1))' # Or just prefix a command with a space =P
+alias hideprev='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
