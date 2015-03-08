@@ -8,14 +8,48 @@ else
   ls_bin="ls"
 fi
 
+# Shell
+# ----------------------------------------------------------
+
 alias '#'=':||' # Replace hash with universal comment for zsh compatibiliy (use "# foo")
 
+# Navigation
+# ----------------------------------------------------------
+
 alias ls="$ls_bin -F --color"
-alias l="$ls_bin -lAh --color"
-alias ll="$ls_bin -l --color"
+alias llb="$ls_bin -lA --color"
+alias l="llb -h"
+alias ll="l"
 alias la="$ls_bin -A --color"
 
-alias '..'='cd ..'
+alias llp="list-all-files-with-numeric-premissions"
+
+# Navigation
+# ----------------------------------------------------------
+
+alias '..1'='cd ../'
+alias '..'='..1'
+
+alias '..2'='cd ../../'
+alias '...'='..2'
+
+alias '..3'='cd ../../../'
+alias '....'='..3'
+
+alias '..4'='cd ../../../../'
+alias '.....'='..4'
+
+alias '..5'='cd ../../../../../'
+alias '......'='..5'
+
+alias '..6'='cd ../../../../../../'
+alias '.......'='..6'
+
+alias '..7'='cd ../../../../../../../'
+alias '........'='..7'
+
+# Programs
+# ----------------------------------------------------------
 
 alias als='alsamixer'
 
