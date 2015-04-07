@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo 'Pulling the latest commits for the dotfiles repository and re-running `script/bootstrap` and `script/install`'
+cd ~/.dotfiles
+git pull
+script/bootstrap
+script/install
