@@ -1,0 +1,17 @@
+#!/bin/bash
+
+app=$1
+
+function phoenix {
+  app=$1
+  # If process is not found
+  if ! [ "$(pidof $app)" ]; then
+    echo "Detected $app not running; restarting it"
+    $app &
+  fi
+}
+
+while :; do
+  phoenix $app
+  sleep 10s
+done
