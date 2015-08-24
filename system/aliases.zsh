@@ -16,9 +16,10 @@ alias dfu="~/.dotfiles/script/update"
 # Shell
 # ----------------------------------------------------------
 
-alias '#'=':||' # Replace hash with universal comment for zsh compatibiliy (use "# foo")
+#alias '#'=':||' # Replace hash with universal comment for zsh compatibiliy (use "# foo")
+setopt interactivecomments
 
-# Navigation
+# Directory listing
 # ----------------------------------------------------------
 
 alias ls="$ls_bin -F --color"
