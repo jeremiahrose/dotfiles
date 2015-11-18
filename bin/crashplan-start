@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Start the CrashPlan backup Java service
+#
+
+echo "Starting CrashPlan service..."
+sudo service crashplan start

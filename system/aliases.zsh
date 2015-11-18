@@ -64,3 +64,6 @@ alias hideprev='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
 
 alias gooch='google-chrome'
 alias gcgpu='google-chrome-with-gpu'
+
+alias cp0='crashplan-stop'
+alias cp1='crashplan-start'
