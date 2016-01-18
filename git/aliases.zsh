@@ -6,13 +6,22 @@ then
   alias git=$hub_path
 fi
 
+function gp {
+  args="$@"
+  if [ -z "$1" ]; then
+    args="origin HEAD"
+  fi
+  eval git push $args
+}
+
 # The rest of my fun git aliases
 # alias gl='git pull --prune'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 # alias gl='git log --graph'
-alias gp='git push origin HEAD'
-alias gpu='git push -u origin HEAD' # Set upstream / track remote branch
-alias gpp='git push production HEAD'
+alias gpu='gp -u origin HEAD' # Set upstream / track remote branch
+alias gps='gp staging HEAD:master'
+alias gpp='gp production HEAD:master'
+alias gposp='gp && gps && gpp'
 alias gd='git diff'
 alias ga='git add'
 alias gc='git commit'
