@@ -31,7 +31,8 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(y
 alias gpu='gp -u origin HEAD' # Set upstream / track remote branch
 alias gps='gp staging HEAD:master'
 alias gpp='gp production HEAD:master'
-alias gposp='gp && gps && gpp'
+alias gpos='gp && gps'
+alias gposp='gpos && gpp'
 alias gd='git diff'
 alias gc='git commit'
 alias gca='git commit --amend'
