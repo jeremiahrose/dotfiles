@@ -6,11 +6,21 @@ then
   alias git=$hub_path
 fi
 
+function ga {
+  args="$@"
+  if [ -z "$1" ]; then
+    args="."
+  fi
+  eval git add $args
+}
+
+
 function gp {
   args="$@"
   if [ -z "$1" ]; then
     args="origin HEAD"
   fi
+  echo "git push $args"
   eval git push $args
 }
 
@@ -23,9 +33,8 @@ alias gps='gp staging HEAD:master'
 alias gpp='gp production HEAD:master'
 alias gposp='gp && gps && gpp'
 alias gd='git diff'
-alias ga='git add'
 alias gc='git commit'
-alias gca='git commit -a'
+alias gca='git commit --amend'
 alias gco='git checkout'
 alias gcb='git copy-branch-name'
 alias gb='git branch'
