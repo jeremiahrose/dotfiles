@@ -47,3 +47,7 @@ alias gcon='git-checkout-commit-next'
 
 alias gstpl='git-update-from-remote-using-stash'
 alias gpcl='git-update-from-remote-using-stash-then-commit'
+
+alias grl='git remote -v'
+alias gra='git remote add'
+alias grr='git remote remove'
