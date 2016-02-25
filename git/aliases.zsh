@@ -14,14 +14,26 @@ function ga {
   eval git add $args
 }
 
+function log_and_run_command {
+  args="$@"
+  echo -n "\e[34m"
+  echo -n '--> '
+  echo -n $args
+  echo "\e[39m"
+  eval $args
+}
 
 function gp {
   args="$@"
   if [ -z "$1" ]; then
     args="origin HEAD"
   fi
-  echo "git push $args"
-  eval git push $args
+  log_and_run_command git push $args
+}
+
+function gsubs {
+  args="$@"
+  log_and_run_command git submodule foreach $args
 }
 
 # The rest of my fun git aliases
@@ -29,10 +41,10 @@ function gp {
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 # alias gl='git log --graph'
 alias gpu='gp -u origin HEAD' # Set upstream / track remote branch
-alias gps='gp staging HEAD:master'
-alias gpp='gp production HEAD:master'
-alias gpos='gp && gps'
-alias gposp='gpos && gpp'
+alias gps='gsubs git push staging HEAD:master && echo && gp staging HEAD:master'
+alias gpp='gsubs git push production HEAD:master && echo && gp production HEAD:master'
+alias gpos='gp && echo && gps'
+alias gposp='gpos && echo && gpp'
 alias gd='git diff'
 alias gc='git commit'
 alias gca='git commit --amend'
