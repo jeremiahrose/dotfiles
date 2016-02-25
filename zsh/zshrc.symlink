@@ -39,5 +39,3 @@ do
 done
 
 unset config_files
-
-export PATH=/home/brendan/.rbenv/shims:$PATH
