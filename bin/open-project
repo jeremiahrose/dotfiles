@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Open a project in Sublime, plus opening Gnome Terminal tabs running some commands
+
+function new-tab {
+  xdotool key ctrl+shift+t
+  sleep 1
+}
+
+function run {
+  xdotool type --delay 1 --clearmodifiers "$0"
+  xdotool key Return
+}
+
+WID= xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)"| awk '{print $5}'
+xdotool windowfocus $WID
+
+
+END
+puts window
+# reset
+
+# TODO: finish
