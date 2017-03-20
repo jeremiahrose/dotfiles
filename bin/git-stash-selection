@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Git stash only a selection of files, with a message.
+#
+# Usage:
+#   git-stash-selection <message> <paths>...
+
+message=$1
+shift
+stash_glob="$*"
+git add --all
+git reset $stash_glob
+git commit -m temp
+git add --all
+git stash save $message
+git reset --soft HEAD^
+git reset

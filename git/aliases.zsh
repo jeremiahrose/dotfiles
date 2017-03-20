@@ -23,6 +23,13 @@ function log_and_run_command {
   eval $args
 }
 
+alias gr='git reset'
+
+function grh {
+  args="$@"
+  log_and_run_command git reset --hard $args
+}
+
 function gp {
   args="$@"
   if [ -z "$1" ]; then
@@ -59,7 +66,8 @@ alias gdh='git diff HEAD'
 alias gpl='git pull'
 alias gundoc='git-undo'
 alias gclear='git reset --hard'
-alias gsts='git stash save'
+# alias gsts='git stash save'
+alias gsts='git-stash-selection'
 alias gstp='git stash pop'
 alias gsta='git stash apply'
 alias gstl='git stash list'
