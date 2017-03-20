@@ -3,9 +3,7 @@
 # Checkout next (newer) commit
 # TODO: test more thoroughly
 
-git-checkout-next-commit() {
-    BRANCH=`git show-ref | grep $(git show-ref -s -- HEAD) | sed 's|.*/\(.*\)|\1|' | grep -v HEAD | sort | uniq`
-    HASH=`git rev-parse $BRANCH`
-    PREV=`git rev-list --topo-order HEAD..$HASH | tail -1`
-    git checkout $PREV
-}
+branch=`git show-ref | grep $(git show-ref -s -- HEAD) | sed 's|.*/\(.*\)|\1|' | grep -v HEAD | sort | uniq`
+hash=`git rev-parse $branch`
+next=`git rev-list --topo-order HEAD..$hash | tail -1`
+git checkout $next
