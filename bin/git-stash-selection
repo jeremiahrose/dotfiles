@@ -7,9 +7,9 @@
 
 message=$1
 shift
-stash_glob="$*"
+stash_paths="$*"
 git add --all
-git reset $stash_glob
+git reset $stash_paths
 git commit -m temp
 git add --all
 git stash save $message
