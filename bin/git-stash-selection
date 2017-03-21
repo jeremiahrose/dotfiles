@@ -10,7 +10,7 @@ shift
 stash_paths="$*"
 git add --all
 git reset $stash_paths
-git commit -m temp
+git commit --allow-empty -m temp
 git add --all
 git stash save $message
 git reset --soft HEAD^
