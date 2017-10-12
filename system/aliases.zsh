@@ -67,3 +67,5 @@ alias gcgpu='google-chrome-with-gpu'
 
 alias cp0='crashplan-stop'
 alias cp1='crashplan-start'
+
+alias open='xdg-open'
