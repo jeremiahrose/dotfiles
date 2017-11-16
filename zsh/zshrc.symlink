@@ -39,5 +39,3 @@ do
 done
 
 unset config_files
-source /usr/share/nvm/init-nvm.sh
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
