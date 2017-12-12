@@ -3,7 +3,6 @@
 :verbose: true
 :backtrace: false
 :benchmark: false
-gem: --user-install --no-document
+gem: --no-document
 install: --no-rdoc --no-ri
 update:  --no-rdoc --no-ri
-
