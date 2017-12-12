@@ -1,3 +1,9 @@
+log() {
+  # echo -e $1
+}
+
+log '~/.zshrc'
+
 # shortcut to this dotfiles path is $ZSH
 export ZSH=$HOME/.dotfiles
 
@@ -12,8 +18,7 @@ compinit
 # Stash your environment variables in ~/.localrc. This means they'll stay out
 # of your main dotfiles repository (which may be public, like this one), but
 # you'll have access to them in your scripts.
-if [[ -a ~/.localrc ]]
-then
+if [[ -a ~/.localrc ]]; then
   source ~/.localrc
 fi
 
@@ -21,21 +26,21 @@ fi
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
 
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
+log "\nLoad the path files"
+for file in ${(M)config_files:#*/path.zsh}; do
+  log $file
   source $file
 done
 
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
-do
+log "\nLoad everything but the path and completion files"
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
+  log $file
   source $file
 done
 
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
-do
+log "\nLoad every completion after autocomplete loads"
+for file in ${(M)config_files:#*/completion.zsh}; do
+  log $file
   source $file
 done
 
