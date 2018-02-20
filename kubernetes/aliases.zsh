@@ -1,0 +1,7 @@
+alias k='kubectl'
+alias kg='kubectl get'
+alias kgp='kubectl get pods'
+alias kgn='kubectl get nodes'
+alias kgs='kubectl get services'
+alias kgi='kubectl get ingresses'
+alias ke='kubectl exec -it'
