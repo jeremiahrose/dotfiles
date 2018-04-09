@@ -26,7 +26,6 @@ setopt EXTENDED_HISTORY # add timestamps to history
 setopt PROMPT_SUBST
 setopt CORRECT
 setopt COMPLETE_IN_WORD
-setopt IGNORE_EOF
 
 setopt APPEND_HISTORY # adds history
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
@@ -43,10 +42,11 @@ bindkey '^[[1;5C' forward-word         # [Ctrl-RightArrow] - move forward one wo
 bindkey '^[[1;5D' backward-word        # [Ctrl-LeftArrow] - move backward one word
 bindkey '^[[5D' beginning-of-line
 bindkey '^[[5C' end-of-line
+bindkey '^[[H' beginning-of-line       # Home in Gnome Terminal
+bindkey '^[[F' end-of-line             # End in Gnome Terminal
 bindkey '^[[3~' delete-char
 bindkey '^[^N' newtab
 bindkey '^?' backward-delete-char
-
 
 
 
