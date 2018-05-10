@@ -1,8 +1,7 @@
 # grc overides for ls
 #   Made possible through contributions from generous benefactors like
 #   `brew install coreutils`
-if $(gls &>/dev/null)
-then
+if (( $+commands[gls] )); then
   ls_bin="gls"
 else
   ls_bin="ls"
