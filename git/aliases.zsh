@@ -43,6 +43,13 @@ function gsubs {
   log_and_run_command git submodule foreach $args
 }
 
+function wip {
+  name="wip-$1" && \
+  gco -b "$name" && \
+  gc -m "$name" && \
+  gp origin HEAD --no-verify
+}
+
 # The rest of my fun git aliases
 # alias gl='git pull --prune'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
