@@ -1,3 +1,4 @@
+touch ~/.z
 source "$ZSH/oh-my-zsh/plugins/z/z.sh"
 unalias z
 function z {
