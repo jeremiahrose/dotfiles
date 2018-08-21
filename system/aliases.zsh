@@ -68,3 +68,5 @@ alias cp0='crashplan-stop'
 alias cp1='crashplan-start'
 
 alias open='xdg-open'
+
+inspect-jq() { x=$(</dev/stdin); echo "$x" | jq -C . > /dev/tty; echo "$x"; }
