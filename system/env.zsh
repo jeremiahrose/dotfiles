@@ -7,3 +7,7 @@ elif (( $+commands[vim] )); then
 else
   export EDITOR='vi'
 fi
+
+if (( $+commands[google-chrome-stable] )); then
+  export BROWSER=google-chrome-stable
+fi
