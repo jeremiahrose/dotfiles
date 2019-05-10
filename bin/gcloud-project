@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# Modified from Mike Williams' GreenSync blog:
+# https://greensync.atlassian.net/wiki/spaces/~mike.williams/blog/2018/07/02/574390273/Per-shell+context+for+gcloud+and+kubectl
+
+set -Eeuo pipefail
+
+set_default=false
+if [[ "${1-}" = "-d" ]]; then
+  set_default=true
+  shift
+fi
+if [[ $# = 0 ]]; then
+  gcloud projects list
+  return
+fi
+case $1 in
+  "--current" | "-c" | '?')
+    if [[ -x "$(command -v gcloud)" ]]; then
+      echo "${CLOUDSDK_CORE_PROJECT-$(gcloud config get-value project)}"
+    else
+      echo "(unset)"
+    fi
+    ;;
+  -*)
+    echo "Unrecognised flag, $1" >&2
+    return 1
+    ;;
+  "")
+    unset CLOUDSDK_CORE_PROJECT
+    ;;
+  *)
+    unset CLOUDSDK_CORE_PROJECT
+    if $set_default; then
+      gcloud config set project "$1"
+    fi
+    export CLOUDSDK_CORE_PROJECT="$1"
+esac
