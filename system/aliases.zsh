@@ -70,3 +70,7 @@ alias cp1='crashplan-start'
 alias open='xdg-open'
 
 inspect-jq() { x=$(</dev/stdin); echo "$x" | jq -C . > /dev/tty; echo "$x"; }
+
+ip-home() {
+  curl -s https://myaussie-api.aussiebroadband.com.au/customer -b myaussie_cookie="$AUSSIE_BROADBAND_TOKEN" | jq -r '.services.NBN[0].ipAddresses[0]'
+}
