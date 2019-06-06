@@ -108,6 +108,8 @@ set_prompt () {
 }
 
 precmd() {
+  # local lc="$BASH_COMMAND" rc=$?
+  # echo "Command [$lc] exited with code [$rc]"
   last_exit_code="$?"
   title "zsh" "%m" "%55<...<%~"
   set_prompt
