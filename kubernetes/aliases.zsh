@@ -3,7 +3,7 @@ function log_and_run_command {
   echo -en "\e[34m"
   echo -en '--> '
   echo -en $args
-  echo "\e[39m"
+  echo -e "\e[39m"
   eval $args
 }
 
