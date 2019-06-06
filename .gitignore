@@ -8,6 +8,7 @@ atom.symlink/themes
 git/gitconfig.symlink
 
 system/secrets.zsh
+greensync/dex-secrets.zsh
 
 config.symlink/htop/
 config.symlink/yarn/
