@@ -99,7 +99,7 @@ exit_code_prompt() {
   else
     local exit_code_prompt_colour="%{$fg_bold[red]%}"
   fi
-  echo "${exit_code_prompt_colour}➜ ${reset_color}"
+  echo "${exit_code_prompt_colour}➜ %{$reset_color%}"
 }
 
 export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(gcloud_prompt) $(kube_ps1)\n$(exit_code_prompt)'
