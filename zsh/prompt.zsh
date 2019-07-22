@@ -107,10 +107,30 @@ set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }
 
+set_title() {
+  # Use the current path (with standard ~ replacement) in square brackets as the prefix of the tab title
+  local tab_title_path=$(basename $PWD) # Full path: %~
+  # When running a command, show the title of the command as the rest of the tab title (truncate to drop the path to the command)
+  local tab_title_command=$(echo "$cmd" | sed -E 's/ +/\n/g' | grep -Ev '^[A-Z0-9_]+=' | head -1)
+  local tab_title="$tab_title_path"
+  if [[ -n "$tab_title_command" ]]; then
+    tab_title="$tab_title: $tab_title_command"
+  fi
+  title "zsh" "$tab_title" "%55<...<%~"
+}
+
+# Called by zsh before executing a command
+preexec() {
+  # Get the full command string
+  local -a cmd=(${(z)1})
+  set_title
+}
+
+# Called by zsh before showing the prompt
 precmd() {
   # local lc="$BASH_COMMAND" rc=$?
   # echo "Command [$lc] exited with code [$rc]"
   last_exit_code="$?"
-  title "zsh" "%m" "%55<...<%~"
+  set_title
   set_prompt
 }
