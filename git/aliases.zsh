@@ -82,6 +82,10 @@ alias gstp='git stash pop'
 alias gsta='git stash apply'
 alias gstl='git stash list'
 
+alias grb='git rebase'
+alias grbi='git rebase -i'
+alias grbc='git rebase --continue'
+
 alias gcop='git-checkout-commit-previous'
 alias gcon='git-checkout-commit-next'
 
