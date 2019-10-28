@@ -15,5 +15,5 @@ dex-dev > /dev/null
 export VISION_DB_HOST="$DEX_DB_HOST"
 export VISION_DB_USER="$DEX_DB_USER"
 export VISION_DB_PASSWORD="$DEX_DB_PASSWORD"
-export VISION_DB_DATABASE=visibility_dev
-export VISION_DB_PORT=5432
+export VISION_DB_DATABASE=vision_dev
+export VISION_DB_PORT=5433
