@@ -74,3 +74,15 @@ inspect-jq() { x=$(</dev/stdin); echo "$x" | jq -C . > /dev/tty; echo "$x"; }
 ip-home() {
   curl -s https://myaussie-api.aussiebroadband.com.au/customer -b myaussie_cookie="$AUSSIE_BROADBAND_TOKEN" | jq -r '.services.NBN[0].ipAddresses[0]'
 }
+
+# Cache sudo credentials indefinitely
+sudos() {
+  # shellcheck disable=SC2034
+  sudo -v &&
+  SUDOS_RUNNING=true &&
+  while :; do
+    sleep 60
+    sudo -nv 2>/dev/null
+  done &
+  disown
+}

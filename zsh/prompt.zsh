@@ -93,6 +93,16 @@ directory_name() {
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
+sudos_prompt() {
+  if sudo -nv 2>/dev/null; then
+    if [[ -n "$SUDOS_RUNNING" ]]; then
+      echo " %{$fg_bold[yellow]%}su+%{$reset_color%}"
+    else
+      echo " %{$fg_bold[yellow]%}su%{$reset_color%}"
+    fi
+  fi
+}
+
 exit_code_prompt() {
   if [[ "$last_exit_code" == "0" ]]; then
     local exit_code_prompt_colour="%{$fg_bold[green]%}"
@@ -102,7 +112,7 @@ exit_code_prompt() {
   echo "${exit_code_prompt_colour}➜ %{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(gcloud_prompt) $(kube_ps1)\n$(exit_code_prompt)'
+export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(gcloud_prompt) $(kube_ps1)$(sudos_prompt)\n$(exit_code_prompt)'
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }
