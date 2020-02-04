@@ -50,6 +50,10 @@ function wip {
   gp origin HEAD --no-verify
 }
 
+function hub-silent {
+  hub "$@" >/dev/null
+}
+
 # The rest of my fun git aliases
 # alias gl='git pull --prune'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
@@ -97,4 +101,7 @@ alias gra='git remote add'
 alias grr='git remote remove'
 
 alias ci='open $(hub ci-status -f%U) >/dev/null'
-alias ghb='hub browse >/dev/null'
+alias ghb='hub-silent browse'
+alias ghbi='hub-silent browse -- issues'
+alias ghbp='hub-silent browse -- pulls'
+alias ghbb='hub-silent browse -- branches'
