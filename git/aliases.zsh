@@ -95,3 +95,6 @@ alias gpcl='git-update-from-remote-using-stash-then-commit'
 alias grl='git remote -v'
 alias gra='git remote add'
 alias grr='git remote remove'
+
+alias ci='open $(hub ci-status -f%U) >/dev/null'
+alias ghb='hub browse >/dev/null'
