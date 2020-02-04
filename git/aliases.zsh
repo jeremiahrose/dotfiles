@@ -72,6 +72,8 @@ alias gcan='git commit --amend --no-edit'
 alias gco='git checkout'
 alias gcb='git copy-branch-name'
 alias gb='git branch'
+alias gbl='gb -a --sort=committerdate --color'
+alias gblr='gbl | tail'
 alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
 # alias gs='git status'
 
