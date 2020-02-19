@@ -12,6 +12,8 @@ done
 dex-db-dev
 dex-dev > /dev/null
 
+export DEX_DB_RETRY_TIMEOUT=0
+
 export VISION_DB_HOST="$DEX_DB_HOST"
 export VISION_DB_USER="$DEX_DB_USER"
 export VISION_DB_PASSWORD="$DEX_DB_PASSWORD"
