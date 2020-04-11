@@ -1,2 +1,2 @@
-export PATH="$PATH:~/.config/yarn/global/node_modules/.bin"
-export PATH="$PATH:~/.npm-global/bin"
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+export PATH="$PATH:$HOME/.npm-global/bin"
