@@ -1,0 +1,1 @@
+alias p='open-project'
