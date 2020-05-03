@@ -4,10 +4,21 @@
 
 set -Eeuo pipefail
 
+absolute_dir_path() {
+  local relative_dir
+  relative_dir="$1"
+  if [ -d "$relative_dir" ]; then
+    cd "$relative_dir" && echo "$PWD"
+  else
+    echo "Directory not found: '$relative_dir'" >&2
+    exit 1
+  fi
+}
+
 find_existing_project_file() {
   local dir_path absolute_dir_path
   dir_path="$1"
-  absolute_dir_path=$(cd "$dir_path" && echo "$PWD")
+  absolute_dir_path=$(absolute_dir_path "$1") || exit 1
   grep -Rl "\"$absolute_dir_path\"" "$PROJECTS"/000_Sublime/*.sublime-project | head -1 || :
 }
 
@@ -27,11 +38,12 @@ derive_project_name_from_dir() {
 }
 
 create_project_file() {
-  local all_dirs all_dirs_absolute new_project_file_path
+  local all_dirs all_dirs_absolute new_project_file_path dir_absolute
   all_dirs=("$@")
   all_dirs_absolute=()
   for dir in "${all_dirs[@]}"; do
-    all_dirs_absolute+=("$(cd "$dir" && echo "$PWD")")
+    dir_absolute="$(absolute_dir_path "$dir")" || exit 1
+    all_dirs_absolute+=("$dir_absolute")
   done
   new_project_file_path="$PROJECTS/000_Sublime/$(derive_project_name_from_dir "${all_dirs_absolute[0]}" 2>/dev/null).sublime-project"
   echo "Creating project file: '$new_project_file_path'..." >&2
@@ -82,5 +94,6 @@ if [ -n "$existing_project_file" ]; then
   )
 else
   echo "Project doesn't exist yet"
-  open_project_file_and_focus_window "$(create_project_file "${all_dirs[@]}")"
+  new_project_file="$(create_project_file "${all_dirs[@]}")"
+  open_project_file_and_focus_window "$new_project_file"
 fi
