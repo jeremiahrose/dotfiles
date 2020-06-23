@@ -16,10 +16,10 @@ function ga {
 
 function log_and_run_command {
   args="$@"
-  echo -n "\e[34m"
-  echo -n '--> '
-  echo -n $args
-  echo "\e[39m"
+  echo -n "\e[34m" >&2
+  echo -n '--> ' >&2
+  echo -n $args >&2
+  echo "\e[39m" >&2
   eval $args
 }
 

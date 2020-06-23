@@ -1,9 +1,9 @@
 function log_and_run_command {
   args="$@"
-  echo -en "\e[34m"
-  echo -en '--> '
-  echo -en $args
-  echo -e "\e[39m"
+  echo -en "\e[34m" >&2
+  echo -en '--> ' >&2
+  echo -en $args >&2
+  echo -e "\e[39m" >&2
   eval $args
 }
 
