@@ -6,6 +6,29 @@ then
   alias git=$hub_path
 fi
 
+gcl() {
+  log_and_run_command hub clone "$@"
+}
+
+gclg() {
+  non_repo_args=()
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -*) non_repo_args+=("$1"); shift;;
+      * ) repo="$1"; shift; break;;
+    esac
+  done
+  non_repo_args+=("$@")
+
+  if [[ $repo = *"/"* ]]; then
+    namespaced_repo=$repo
+  else
+    namespaced_repo=greensync/$repo
+  fi
+
+  gcl "$namespaced_repo" "${non_repo_args[@]}"
+}
+
 function ga {
   args="$@"
   if [ -z "$1" ]; then
