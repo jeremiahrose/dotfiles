@@ -103,6 +103,10 @@ sudos_prompt() {
   fi
 }
 
+disk_remaining() {
+  df -h / --output=avail | tail -1 | tr -d ' \n' && printf B
+}
+
 exit_code_prompt() {
   if [[ "$last_exit_code" == "0" ]]; then
     local exit_code_prompt_colour="%{$fg_bold[green]%}"
@@ -112,7 +116,7 @@ exit_code_prompt() {
   echo "${exit_code_prompt_colour}➜ %{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(gcloud_prompt) $(kube_ps1)$(sudos_prompt)\n$(exit_code_prompt)'
+export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(gcloud_prompt) $(kube_ps1) $(disk_remaining) - $(date)$(sudos_prompt)\n$(exit_code_prompt)'
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
 }
