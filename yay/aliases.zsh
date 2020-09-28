@@ -2,5 +2,5 @@
 # Also removes the (sometimes quite large) built packages afterwards which would otherwise gradually accumulate
 yay() {
   LESS=SR command yay "$@" && \
-    rm -fv ~/.cache/yay/*/*.pkg.*
+    rm -fv ~/.cache/yay/*/*.pkg.*(N)
 }
