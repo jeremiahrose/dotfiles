@@ -1,3 +1,9 @@
-#!/bin/bash -eu
+#!/bin/bash
 
-sudo -E "$(orig docker)" "$@"
+set -Eeuo pipefail
+
+if [[ "${PODMAN-}" == "true" ]]; then
+  podman "$@"
+else
+  sudo -E "$(orig docker)" "$@"
+fi
