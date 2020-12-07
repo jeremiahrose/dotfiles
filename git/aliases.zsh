@@ -131,3 +131,5 @@ alias ghb='hub-silent browse'
 alias ghbi='hub-silent browse -- issues'
 alias ghbp='hub-silent browse -- pulls'
 alias ghbb='hub-silent browse -- branches'
+
+alias gcom="git branch -al | grep -E '^ *remotes/origin/main$' > /dev/null && gco main || gco master"
