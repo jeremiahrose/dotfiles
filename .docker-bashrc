@@ -1,0 +1,18 @@
+# This allows Docker containers to make use of part of my dotfiles
+
+_source_for_bash() {
+  source <(
+    sed -E \
+      -e 's/\$\+commands\[[a-z]+\]/false/g' \
+      -e 's/^setopt interactivecomments$//g' \
+      "/.docker-rc.d/$1"
+  )
+}
+
+_source_for_bash gcloud/aliases.zsh
+_source_for_bash git/aliases.zsh
+_source_for_bash kubernetes/aliases.zsh
+_source_for_bash ruby/aliases.zsh
+_source_for_bash system/aliases.zsh
+
+export PATH="/.docker-rc.d/bin:$PATH"
