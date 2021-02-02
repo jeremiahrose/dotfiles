@@ -83,7 +83,11 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(y
 # alias gl='git log --graph'
 alias glp='git log -p'
 alias gsh='git show'
+alias gpf='gp origin HEAD --force-with-lease'
 alias gpu='gp -u origin HEAD' # Set upstream / track remote branch
+alias gpuf='gpu --force-with-lease'
+alias gpufn='gpu --force-with-lease --no-verify'
+alias gpun='gpu --no-verify'
 alias gps='gsubs git push staging HEAD:master && echo && gp staging HEAD:master'
 alias gpp='gsubs git push production HEAD:master && echo && gp production HEAD:master'
 alias gpos='gp && echo && gps'
