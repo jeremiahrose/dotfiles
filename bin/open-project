@@ -87,7 +87,7 @@ all_dirs=("${@-$first_dir}")
 
 existing_project_file="$(find_existing_project_file "$first_dir")"
 if [ -n "$existing_project_file" ]; then
-  echo "Project exists"
+  echo "Project exists: $existing_project_file"
   focus_window_of_project_file "$existing_project_file" || (
     echo "Project not already open"
     open_project_file_and_focus_window "$existing_project_file"
