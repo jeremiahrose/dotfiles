@@ -16,3 +16,5 @@ _source_for_bash ruby/aliases.zsh
 _source_for_bash system/aliases.zsh
 
 export PATH="/.docker-rc.d/bin:$PATH"
+
+printf "\\e[1m\\e[32m%s\\e[0m\\n" "Dotfiles activated" >&2
