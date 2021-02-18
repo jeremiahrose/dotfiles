@@ -83,6 +83,7 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(y
 # alias gl='git log --graph'
 alias glp='git log -p'
 alias gsh='git show'
+alias gf='git fetch'
 alias gpf='gp origin HEAD --force-with-lease'
 alias gpu='gp -u origin HEAD' # Set upstream / track remote branch
 alias gpuf='gpu --force-with-lease'
