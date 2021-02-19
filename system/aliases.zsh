@@ -69,8 +69,14 @@ alias cp1='crashplan-start'
 
 inspect-jq() { x=$(</dev/stdin); echo "$x" | jq -C . > /dev/tty; echo "$x"; }
 
+aussie-broadband() {
+  curl -s https://myaussie-api.aussiebroadband.com.au/customer -b myaussie_cookie="$AUSSIE_BROADBAND_TOKEN"
+}
+ip-mad() {
+  aussie-broadband | jq -r '.services.NBN[] | select(.description | test(" UN ") | not).ipAddresses[0]'
+}
 ip-home() {
-  curl -s https://myaussie-api.aussiebroadband.com.au/customer -b myaussie_cookie="$AUSSIE_BROADBAND_TOKEN" | jq -r '.services.NBN[0].ipAddresses[0]'
+  aussie-broadband | jq -r '.services.NBN[] | select(.description | test(" UN ")).ipAddresses[0]'
 }
 
 # Cache sudo credentials indefinitely
