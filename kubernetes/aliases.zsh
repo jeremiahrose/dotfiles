@@ -23,3 +23,8 @@ alias kdn='kd node'
 alias kds='kd secret'
 alias kdi='kd ingress'
 alias ke='k exec -it'
+
+kgsd() {
+  kgs -ojson "${1?secret name required}" | ruby -r yaml -r base64 -e 'puts YAML.load(STDIN.read)["data"].transform_values{|v|Base64.decode64(v)}.to_yaml'
+}
+alias kgsddb='kgsd database-credentials'
