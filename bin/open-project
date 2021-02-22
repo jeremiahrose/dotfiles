@@ -4,6 +4,10 @@
 
 set -Eeuo pipefail
 
+bold="\\e[1m"
+red="\\e[38;5;196m"
+reset="\\e[0m"
+
 absolute_dir_path() {
   local relative_dir
   relative_dir="$1"
@@ -47,6 +51,15 @@ create_project_file() {
   done
   new_project_file_path="$PROJECTS/000_Sublime/$(derive_project_name_from_dir "${all_dirs_absolute[0]}" 2>/dev/null).sublime-project"
   echo "Creating project file: '$new_project_file_path'..." >&2
+  if [ -f "$new_project_file_path" ]; then
+    printf '%b%s%b' "$bold$red" "Error: Conflicting project file exists:" "$reset\n" >&2
+    jq < "$new_project_file_path" >&2
+    echo "The requested paths that were not found in that file are: " >&2
+    for dir in "${all_dirs_absolute[@]}"; do
+      echo "- $dir" >&2
+    done
+    exit 1
+  fi
   ruby -r json -e 'puts({ folders: ARGV.map { |path| { path: path } } }.to_json)' "${all_dirs_absolute[@]}" > "$new_project_file_path"
   echo "$new_project_file_path"
 }
