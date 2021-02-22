@@ -1,5 +1,8 @@
 # This allows Docker containers to make use of part of my dotfiles
 
+# Allow non-interactive use of aliases
+shopt -s expand_aliases
+
 _source_for_bash() {
   source <(
     sed -E \
@@ -17,4 +20,9 @@ _source_for_bash system/aliases.zsh
 
 export PATH="/.docker-rc.d/bin:$PATH"
 
-printf "\\e[1m\\e[32m%s\\e[0m\\n" "Dotfiles activated" >&2
+if [[ -z "$LOGGED_DOTFILES_LOADED" ]]; then
+  printf "\\e[1m\\e[32m%s\\e[0m\\n" "Dotfiles activated" >&2
+
+  # Stop recursive logging
+  export LOGGED_DOTFILES_LOADED=1
+fi
