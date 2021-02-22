@@ -60,7 +60,8 @@ focus_window_of_project_name() {
   project_name="$1"
   window_title="($project_name) - Sublime Text"
   echo "Attempting to focus window: '$window_title'" >&2
-  wmctrl -a "$window_title"
+  # wmctrl -a "$window_title" # Doesn't work on Wayland
+  gdbus call -e -d org.gnome.Shell -o /org/gnome/Shell -m org.gnome.Shell.Eval "var mw = global.get_window_actors().map(w=>w.meta_window).find(mw=>mw.get_title().includes('$window_title')).activate(0)" | grep -E '^\(true,' > /dev/null
 }
 
 focus_window_of_project_file() {
