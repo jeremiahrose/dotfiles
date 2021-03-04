@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -Eeuo pipefail
+
 echo 'Stopping any running containers...'
 docker ps -aq | xargs -r docker stop
 
