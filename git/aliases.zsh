@@ -137,4 +137,16 @@ alias ghbi='hub-silent browse -- issues'
 alias ghbp='hub-silent browse -- pulls'
 alias ghbb='hub-silent browse -- branches'
 
-alias gcom="git branch -al | grep -E '^ *remotes/origin/main$' > /dev/null && gco main || gco master"
+# Check out the primary branch
+gcom() {
+  local dirname_branch
+  dirname_branch=$(git rev-parse --show-toplevel | grep -oP '(?<=:)\S+')
+  if [[ -n "$dirname_branch" ]]; then
+    git checkout "$dirname_branch"
+    return
+  fi
+
+  git branch -al | grep -E '^ *remotes/origin/main$' > /dev/null && git checkout main && return
+
+  git checkout master
+}
