@@ -1,3 +1,1 @@
-if command -v drowsier &>/dev/null; then
-  drowsier --tty || exit
-fi
+[[ -f "$PROJECTS/drowsier/zshrc.zsh" ]] && . "$PROJECTS/drowsier/zshrc.zsh"
