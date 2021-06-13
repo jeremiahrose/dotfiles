@@ -1,3 +1,5 @@
+[[ -f "$HOME/Projects/drowsier/zshrc.zsh" ]] && . "$HOME/Projects/drowsier/zshrc.zsh"
+
 log() {
   # echo -e $1
 }
