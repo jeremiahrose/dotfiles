@@ -132,6 +132,25 @@ alias grr='git remote remove'
 
 alias cis='hub ci-status -v --color'
 alias ci='cis | tee /dev/stderr | grep -oE "https://\S+" | head -1 | xargs -r open &>/dev/null'
+
+ci-wait() {
+  local ci_status
+  while :; do
+    ci_status="$(hub ci-status)"
+    if [[ "$ci_status" != 'pending' ]]; then
+      echo
+      break
+    fi
+    printf .
+    sleep 0.5
+  done
+  if [[ "$ci_status" != 'success' ]]; then
+    echo "CI status was not success! ($ci_status)" >&2
+  fi
+  cis
+  [[ "$ci_status" == 'success' ]]
+}
+
 alias ghb='hub-silent browse'
 alias ghbi='hub-silent browse -- issues'
 alias ghbp='hub-silent browse -- pulls'
