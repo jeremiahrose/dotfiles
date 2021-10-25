@@ -13,6 +13,10 @@ dex-db-dev
 dex-dev > /dev/null
 
 export DEX_DB_RETRY_TIMEOUT=0
+export DEX_PUBSUB_PROJECT=greensync-dex-dev
+export DEX_PUBSUB_EMULATOR_HOST=localhost:8085
+export DEX_PUBSUB_ENVIRONMENT_NAME=dev
+export DEX_PUBSUB_SERVICE_ACCOUNT_EMAIL=irrelevant-with-emulator@dev.local
 
 export VISION_DB_HOST="$DEX_DB_HOST"
 export VISION_DB_USER="$DEX_DB_USER"
