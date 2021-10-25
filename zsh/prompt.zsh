@@ -118,9 +118,13 @@ exit_code_prompt() {
   echo "${exit_code_prompt_colour}➜ %{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(gcloud_prompt) $(kube_ps1) $(disk_remaining) - $(date)$(sudos_prompt)'
-if typeset -f dex-env-shell-prompt > /dev/null; then
-  export PROMPT="$PROMPT"$'\n$(dex-env-shell-prompt)'
+if [[ "$SIMPLE_PROMPT" == 'true' ]]; then
+  export PROMPT=""
+else
+  export PROMPT=$'\n$(rb_prompt)in $(directory_name) $(git_dirty)$(need_push)\n$(gcloud_prompt) $(kube_ps1) $(disk_remaining) - $(date)$(sudos_prompt)'
+  if typeset -f dex-env-shell-prompt > /dev/null; then
+    export PROMPT="$PROMPT"$'\n$(dex-env-shell-prompt)'
+  fi
 fi
 export PROMPT="$PROMPT"$'\n$(exit_code_prompt)'
 set_prompt () {
