@@ -158,14 +158,18 @@ alias ghbb='hub-silent browse -- branches'
 
 # Check out the primary branch
 gcom() {
+  log_and_run_command git checkout "$(git-primary-branch-name)"
+}
+
+# Return the name of the primary branch
+git-primary-branch-name() {
   local dirname_branch
   dirname_branch=$(git rev-parse --show-toplevel | grep -oP '(?<=:)\S+')
   if [[ -n "$dirname_branch" ]]; then
-    git checkout "$dirname_branch"
-    return
+    echo -n "$dirname_branch"
+  elif git branch -al | grep -E '^ *remotes/origin/main$' > /dev/null; then
+    echo -n main
+  else
+    echo -n master
   fi
-
-  git branch -al | grep -E '^ *remotes/origin/main$' > /dev/null && git checkout main && return
-
-  git checkout master
 }
