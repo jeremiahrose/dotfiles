@@ -18,11 +18,12 @@ export DEX_PUBSUB_ENABLED=false
 export DEX_PUBSUB_PROJECT=greensync-dex-dev
 export DEX_PUBSUB_EMULATOR_HOST=localhost:8085
 export DEX_PUBSUB_ENVIRONMENT_NAME=dev
-export DEX_PUBSUB_SERVICE_ACCOUNT_EMAIL=irrelevant-with-emulator@dev.local
+export DEX_PUBSUB_OIDC_SIGNING_SERVICE_ACCOUNT_EMAIL=irrelevant-with-emulator@dev.local
 
 export DEX_BIGQUERY_ENABLED=false
 export DEX_TELEMETRY_ARCHIVE_DB_PROJECT=greensync-dex-dev
 export DEX_TELEMETRY_ARCHIVE_DB_DATASET=local_dev
+export DEX_TELEMETRY_ARCHIVE_DB_LOCATION=australia-southeast2
 export DEX_TELEMETRY_ARCHIVE_DB_RETRY_TIMEOUT=0
 
 export VISION_DB_HOST="$DEX_DB_HOST"
