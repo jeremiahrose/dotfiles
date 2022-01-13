@@ -117,7 +117,9 @@ alias gsta='git stash apply'
 alias gstl='git stash list'
 
 alias grb='git rebase'
+alias grbm='git rebase $(git-primary-branch-name)'
 alias grbi='git rebase -i'
+alias grbim='git rebase -i $(git-primary-branch-name)'
 alias grbc='git rebase --continue'
 
 alias gcop='git-checkout-commit-previous'
