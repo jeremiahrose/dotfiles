@@ -74,6 +74,7 @@ focus_window_of_project_name() {
   window_title="($project_name) - Sublime Text"
   echo "Attempting to focus window: '$window_title'" >&2
   # wmctrl -a "$window_title" # Doesn't work on Wayland
+  return 1 # Disable Gnome JS eval which is prevented in new Gnome =(
   gdbus call -e -d org.gnome.Shell -o /org/gnome/Shell -m org.gnome.Shell.Eval "var mw = global.get_window_actors().map(w=>w.meta_window).find(mw=>mw.get_title().includes('$window_title')).activate(0)" | grep -E '^\(true,' > /dev/null
 }
 
@@ -89,6 +90,7 @@ open_project_file_and_focus_window() {
   project_file="$1"
   subl --project "$project_file"
   echo -n "Waiting for Sublime to open project"
+  return # Sublime seems to auto-focus now, thankfully!
   while :; do
     focus_window_of_project_file "$project_file" &> /dev/null && break
     printf .
