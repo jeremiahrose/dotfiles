@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+#
+# Uses the Git co-authors config to generate a list of Git co-authors for a commit message
+#
+# https://github.com/greensync/co-author/blob/main/git-coauthors
+#
+# Usage:
+#
+#     gc -m "Fix a thing
+#
+#     Some description
+#
+#     $(gcoa sm jerome)"
+
+require 'json'
+
+class GitCoAuthors
+  def initialize(given_initials_list_or_first_names)
+    @given_initials_list_or_first_names = given_initials_list_or_first_names
+  end
+
+  def call
+    selected_coauthors.map(&method(:present_coauthor))
+  end
+
+  private
+
+  attr_reader :given_initials_list_or_first_names
+
+  def selected_coauthors
+    coauthors_config
+      .slice(*initials_list)
+      .values
+  end
+
+  def coauthors_config
+    @coauthors_config ||=
+      File.read(co_authors_config_file_path)
+        .then(&JSON.method(:parse))
+        .fetch('coauthors')
+  end
+
+  def co_authors_config_file_path
+    "#{ENV.fetch('PROJECTS')}/co-author/git-coauthors"
+  end
+
+  def initials_list
+    @initials_list ||=
+      given_initials_list_or_first_names.map do |given_initials_or_first_name|
+        first_name_to_initials.fetch(given_initials_or_first_name, given_initials_or_first_name)
+      end
+  end
+
+  def first_name_to_initials
+    @first_name_to_initials ||=
+      coauthors_config.map do |initials, person|
+        first_name = person.fetch('name').split(' ').first.downcase
+        [first_name, initials]
+      end.to_h
+  end
+
+  def present_coauthor(person)
+    "Co-Authored-By: #{person.fetch('name')} <#{person.fetch('email')}>"
+  end
+end
+
+if __FILE__ == $0
+  puts GitCoAuthors.new(ARGV).call
+end

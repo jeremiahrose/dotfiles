@@ -175,3 +175,5 @@ git-primary-branch-name() {
     echo -n master
   fi
 }
+
+alias gcoa=git-co-authors
