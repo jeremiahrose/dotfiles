@@ -3,7 +3,7 @@
 set -Eeuo pipefail
 
 if [[ "${PODMAN-}" == "true" ]]; then
-  podman "$@"
+  exec podman "$@"
 else
-  sudo -E "$(orig docker-compose)" "$@"
+  exec sudo -E "$(orig docker-compose)" "$@"
 fi
