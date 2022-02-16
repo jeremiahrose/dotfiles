@@ -1,8 +1,8 @@
 # grc overides for ls
 #   Made possible through contributions from generous benefactors like
 #   `brew install coreutils`
-if (( $+commands[gls] )); then
-  ls_bin="gls"
+if (( $+commands[exa] )); then
+  ls_bin="exa"
 else
   ls_bin="ls"
 fi
@@ -21,11 +21,8 @@ setopt interactivecomments
 # Directory listing
 # ----------------------------------------------------------
 
-alias ls="$ls_bin -F --color"
-alias llb="$ls_bin -lA --color"
-alias l="llb -h"
-alias ll="l"
-alias la="$ls_bin -A --color"
+alias ls="$ls_bin -F"
+alias l="ls -alF --icons --colour-scale --header --git"
 
 alias llp="list-all-files-with-numeric-premissions"
 
