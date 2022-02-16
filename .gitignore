@@ -8,7 +8,7 @@ atom.symlink/themes
 git/gitconfig.symlink
 
 secrets.zsh
-*-secrets.zsh
+*-secrets*.zsh
 
 config.symlink/htop/
 config.symlink/yarn/
