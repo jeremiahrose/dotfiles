@@ -2,6 +2,30 @@ autoload colors && colors
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
+local lc=$'\e[' rc=m bold="01;" # Standard ANSI terminal escape values
+
+typeset -Ag bright_colour fg_bright_bold
+bright_colour=(
+  black   90
+  red     91
+  green   92
+  yellow  93
+  blue    94
+  magenta 95
+  cyan    96
+  white   97
+)
+fg_bright_bold=(
+  black   "$lc$bold$bright_colour[black]$rc"
+  red     "$lc$bold$bright_colour[red]$rc"
+  green   "$lc$bold$bright_colour[green]$rc"
+  yellow  "$lc$bold$bright_colour[yellow]$rc"
+  blue    "$lc$bold$bright_colour[blue]$rc"
+  magenta "$lc$bold$bright_colour[magenta]$rc"
+  cyan    "$lc$bold$bright_colour[cyan]$rc"
+  white   "$lc$bold$bright_colour[white]$rc"
+)
+
 if (( $+commands[git] ))
 then
   git="$commands[git]"
@@ -20,9 +44,9 @@ git_dirty() {
   else
     if [[ $($git status --porcelain) == "" ]]
     then
-      echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
+      echo "on %{$fg_bright_bold[green]%}$(git_prompt_info)%{$reset_color%}"
     else
-      echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+      echo "on %{$fg_bright_bold[red]%}$(git_prompt_info)%{$reset_color%}"
     fi
   fi
 }
@@ -42,7 +66,7 @@ need_push () {
   then
     echo " "
   else
-    echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
+    echo " with %{$fg_bright_bold[magenta]%}unpushed%{$reset_color%} "
   fi
 }
 
@@ -63,7 +87,7 @@ rb_prompt() {
   version="$(ruby_version)"
   if ! [[ -z "$version" ]]
   then
-    echo "%{$fg_bold[yellow]%}$version%{$reset_color%} "
+    echo "%{$fg_bright_bold[yellow]%}$version%{$reset_color%} "
   else
     echo ""
   fi
@@ -92,15 +116,15 @@ else
 fi
 
 directory_name() {
-  echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
+  echo "%{$fg_bright_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
 sudos_prompt() {
   if sudo -nv 2>/dev/null; then
     if [[ -n "$SUDOS_RUNNING" ]]; then
-      echo " %{$fg_bold[yellow]%}su+%{$reset_color%}"
+      echo " %{$fg_bright_bold[yellow]%}su+%{$reset_color%}"
     else
-      echo " %{$fg_bold[yellow]%}su%{$reset_color%}"
+      echo " %{$fg_bright_bold[yellow]%}su%{$reset_color%}"
     fi
   fi
 }
@@ -111,9 +135,9 @@ disk_remaining() {
 
 exit_code_prompt() {
   if [[ "$last_exit_code" == "0" ]]; then
-    local exit_code_prompt_colour="%{$fg_bold[green]%}"
+    local exit_code_prompt_colour="%{$fg_bright_bold[green]%}"  # "%F{10}" #"$lc%{$(($color[green]+8))%}"
   else
-    local exit_code_prompt_colour="%{$fg_bold[red]%}"
+    local exit_code_prompt_colour="%{$fg_bright_bold[red]%}"
   fi
   echo "${exit_code_prompt_colour}➜ %{$reset_color%}"
 }
@@ -128,7 +152,7 @@ else
 fi
 export PROMPT="$PROMPT"$'\n$(exit_code_prompt)'
 set_prompt () {
-  export RPROMPT="%{$fg_bold[cyan]%}%{$reset_color%}"
+  export RPROMPT="%{$fg_bright_bold[cyan]%}%{$reset_color%}"
 }
 
 set_title() {
