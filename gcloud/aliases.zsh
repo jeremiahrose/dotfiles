@@ -17,3 +17,5 @@ gcrl() {
     gcrli
   fi
 }
+
+alias gcpl=gcp-logs-view-web

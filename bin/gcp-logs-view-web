@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'shellwords'
+require 'uri'
+
+require 'dotenv'
+
+Dotenv.load('auto/deploy.env', 'auto/.env', '.env')
+
+gcp_project = ENV.fetch('GCP_PROJECT')
+gcp_location = ENV.fetch('GCP_LOCATION')
+gke_cluster = ENV.fetch('GKE_CLUSTER')
+gke_namespace = ENV.fetch('GKE_NAMESPACE')
+
+query = <<~QUERY
+  resource.type="k8s_container"
+  resource.labels.project_id="#{gcp_project}"
+  resource.labels.location="#{gcp_location}"
+  resource.labels.cluster_name="#{gke_cluster}"
+  resource.labels.namespace_name="#{gke_namespace}"
+  -resource.labels.container_name="cloud-sql-proxy"
+QUERY
+query_encoded = URI.encode_www_form_component(query.chomp)
+url = "https://console.cloud.google.com/logs/query;query=#{query_encoded}?project=#{gcp_project}&authuser=1"
+puts url
+system("open #{url.shellescape}")
