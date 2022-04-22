@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec xdg-open "$@"
+exec xdg-open "$@" 2>&1 | grep -vE '(^Opening in existing browser session\.$|InitializeSandbox\(\) called with multiple threads in process gpu-process.)'
