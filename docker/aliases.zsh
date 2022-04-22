@@ -1,6 +1,6 @@
 alias d='docker'
-alias dc='docker-compose'
-alias drm='docker-rm'
+alias dc='log_and_run_command docker-compose'
+alias drm='log_and_run_command docker-rm'
 alias dcl='docker-clean'
 alias dcd='dc down'
 alias dcb='dc build'
