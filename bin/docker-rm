@@ -3,7 +3,7 @@
 set -Eeuo pipefail
 
 echo 'Stopping any running containers...'
-docker ps -aq | xargs -r docker stop
+docker ps -aq | xargs -r docker stop "$@"
 
 echo 'Removing all containers...'
 docker container ls -aq | xargs -r docker rm
