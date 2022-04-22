@@ -21,8 +21,8 @@ setopt interactivecomments
 # Directory listing
 # ----------------------------------------------------------
 
-alias ls="$ls_bin -F"
-alias l="ls -alF --icons --colour-scale --header --git"
+alias ls="$ls_bin"
+alias l="ls -alF --icons --colour-scale --header --git -a"
 
 alias llp="list-all-files-with-numeric-premissions"
 
