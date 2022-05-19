@@ -4,8 +4,18 @@
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && [ -f "$HOME/.fzf/shell/completion.zsh" ] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+if [[ $- == *i* ]]; then
+  if [ -f /usr/share/fzf/completion.zsh ]; then
+    source /usr/share/fzf/completion.zsh 2> /dev/null
+  elif [ -f "$HOME/.fzf/shell/completion.zsh" ]; then
+    source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+  fi
+fi
 
 # Key bindings
 # ------------
-[ -f "$HOME/.fzf/shell/key-bindings.zsh" ] && source "$HOME/.fzf/shell/key-bindings.zsh"
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+  source /usr/share/fzf/key-bindings.zsh
+elif [ -f "$HOME/.fzf/shell/key-bindings.zsh" ]; then
+  source "$HOME/.fzf/shell/key-bindings.zsh"
+fi
