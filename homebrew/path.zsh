@@ -1,1 +1,0 @@
-export PATH=~/.linuxbrew/bin:$PATH

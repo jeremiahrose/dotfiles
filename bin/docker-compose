@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -Eeuo pipefail
-
-if [[ "${PODMAN-}" == "true" ]]; then
-  exec podman "$@"
-else
-  exec sudo -E "$(orig docker-compose)" "$@"
-fi

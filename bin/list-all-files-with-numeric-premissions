@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# Show a basic list of files, with each prefixed by its permissons, shown numerically
-# Should be owned by root:root, chmod, and have the setuid bit set
-#
-
-stat -c "%a %n" .* *

@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# Stop the CrashPlan backup Java service
-#
-
-echo "Stopping CrashPlan service..."
-sudo service crashplan stop

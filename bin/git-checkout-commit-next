@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# Checkout next (newer) commit
-# TODO: test more thoroughly
-
-branch=`git show-ref | grep $(git show-ref -s -- HEAD) | sed 's|.*/\(.*\)|\1|' | grep -v HEAD | sort | uniq`
-hash=`git rev-parse $branch`
-next=`git rev-list --topo-order HEAD..$hash | tail -1`
-git checkout $next

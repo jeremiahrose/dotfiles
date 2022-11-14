@@ -1,5 +1,0 @@
-#!/bin/sh
-#
-# Launch Google Chrome with GPU force-enabled, attached to the console
-
-google-chrome --ignore-gpu-blacklist --disable-gpu-sandbox
