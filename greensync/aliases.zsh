@@ -1,0 +1,6 @@
+alias ad='./auto/dev'
+alias at='./auto/test'
+alias atb='./auto/test-bridge'
+alias ati='./auto/test-integration'
+alias atf='./auto/test-features'
+alias st='./scripts/test'

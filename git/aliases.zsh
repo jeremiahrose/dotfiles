@@ -1,8 +1,7 @@
 # Use `hub` as our git wrapper:
 #   http://defunkt.github.com/hub/
 hub_path=$(which hub)
-if (( $+commands[hub] ))
-then
+if (($ + commands[hub])); then
   alias git=$hub_path
 fi
 
@@ -14,8 +13,15 @@ gclg() {
   non_repo_args=()
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -*) non_repo_args+=("$1"); shift;;
-      * ) repo="$1"; shift; break;;
+    -*)
+      non_repo_args+=("$1")
+      shift
+      ;;
+    *)
+      repo="$1"
+      shift
+      break
+      ;;
     esac
   done
   non_repo_args+=("$@")
@@ -67,10 +73,10 @@ function gsubs {
 }
 
 function wip {
-  name="wip-$1" && \
-  gco -b "$name" && \
-  gc -m "$name" && \
-  gp origin HEAD --no-verify
+  name="wip-$1" &&
+    gco -b "$name" &&
+    gc -m "$name" &&
+    gp origin HEAD --no-verify
 }
 
 function hub-silent {
@@ -84,6 +90,8 @@ alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(y
 alias glp='git log -p'
 alias gsh='git show'
 alias gf='git fetch'
+alias gfa='git fetch --all'
+alias gpfwl='git push --force-with-lease'
 alias gpf='gp origin HEAD --force-with-lease'
 alias gpu='gp -u origin HEAD' # Set upstream / track remote branch
 alias gpuf='gpu --force-with-lease'
@@ -96,14 +104,16 @@ alias gposp='gpos && echo && gpp'
 alias gd='git diff'
 alias gc='git commit'
 alias gca='git commit --amend'
+alias gcf='git commit --fixup'
 alias gcan='git commit --amend --no-edit'
 alias gco='git checkout'
+alias gcob='git checkout -b'
 alias gcb='git copy-branch-name'
 alias gb='git branch'
 alias gbl='gb -a --sort=committerdate --color'
 alias gblr='gbl | tail'
 alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
-# alias gs='git status'
+# alias gs='git statusdfsgdhs'
 
 alias gds='git diff --staged'
 alias gdh='git diff HEAD'
@@ -175,9 +185,9 @@ git-primary-branch-name() {
   dirname_branch=$(git rev-parse --show-toplevel | grep -oP '(?<=:)\S+')
   if [[ -n "$dirname_branch" ]]; then
     echo -n "$dirname_branch"
-  elif git branch -al | grep -E '^ *remotes/origin/main$' > /dev/null; then
+  elif git branch -al | grep -E '^ *remotes/origin/main$' >/dev/null; then
     echo -n main
-  elif git branch -al | grep -E '^ *remotes/origin/master$' > /dev/null; then
+  elif git branch -al | grep -E '^ *remotes/origin/master$' >/dev/null; then
     echo -n master
   fi
 }
