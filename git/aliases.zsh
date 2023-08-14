@@ -1,14 +1,3 @@
-# Use `hub` as our git wrapper:
-#   http://defunkt.github.com/hub/
-hub_path=$(which hub)
-if (($ + commands[hub])); then
-  alias git=$hub_path
-fi
-
-gcl() {
-  log_and_run_command hub clone "$@"
-}
-
 gclg() {
   non_repo_args=()
   while [[ $# -gt 0 ]]; do
@@ -79,21 +68,34 @@ function wip {
     gp origin HEAD --no-verify
 }
 
-function hub-silent {
-  hub "$@" >/dev/null
+function push_and_set_remote {
+  protected_branch='main'
+  current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+
+  if [ $protected_branch = $current_branch ]
+  then
+    if read -q "choice?Do you really want to push to main? [y|n] "; then
+      git push -u origin HEAD
+    else
+      echo
+    fi
+  else
+      git push -u origin HEAD
+  fi
 }
 
 # The rest of my fun git aliases
 # alias gl='git pull --prune'
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gl="git log --decorate --oneline --graph --all -n17"
 # alias gl='git log --graph'
+alias gap='git add -p'
 alias glp='git log -p'
 alias gsh='git show'
 alias gf='git fetch'
 alias gfa='git fetch --all'
 alias gpfwl='git push --force-with-lease'
 alias gpf='gp origin HEAD --force-with-lease'
-alias gpu='gp -u origin HEAD' # Set upstream / track remote branch
+alias gpu='push_and_set_remote' # Set upstream / track remote branch
 alias gpuf='gpu --force-with-lease'
 alias gpufn='gpu --force-with-lease --no-verify'
 alias gpun='gpu --no-verify'
@@ -112,7 +114,7 @@ alias gcb='git copy-branch-name'
 alias gb='git branch'
 alias gbl='gb -a --sort=committerdate --color'
 alias gblr='gbl | tail'
-alias gs='git status -sb' # upgrade your git if -sb breaks for you. it's fun.
+alias gs='git status' # upgrade your git if -sb breaks for you. it's fun.
 # alias gs='git statusdfsgdhs'
 
 alias gds='git diff --staged'
@@ -142,31 +144,7 @@ alias grl='git remote -v'
 alias gra='git remote add'
 alias grr='git remote remove'
 
-alias cis='hub ci-status -v --color'
 alias ci='cis | tee /dev/stderr | grep -oE "https://\S+" | head -1 | xargs -r open &>/dev/null'
-
-ci-wait() {
-  local ci_status
-  while :; do
-    ci_status="$(hub ci-status)"
-    if [[ "$ci_status" != 'pending' ]]; then
-      echo
-      break
-    fi
-    printf .
-    sleep 0.5
-  done
-  if [[ "$ci_status" != 'success' ]]; then
-    echo "CI status was not success! ($ci_status)" >&2
-  fi
-  cis
-  [[ "$ci_status" == 'success' ]]
-}
-
-alias ghb='hub-silent browse'
-alias ghbi='hub-silent browse -- issues'
-alias ghbp='hub-silent browse -- pulls'
-alias ghbb='hub-silent browse -- branches'
 
 # Check out the primary branch
 gcom() {

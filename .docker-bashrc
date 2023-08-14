@@ -1,28 +1,34 @@
-# This allows Docker containers to make use of part of my dotfiles
+# # This allows Docker containers to make use of part of my dotfiles
 
-# Allow non-interactive use of aliases
-shopt -s expand_aliases
+# # Allow non-interactive use of aliases
+# shopt -s expand_aliases
 
-_source_for_bash() {
-  source <(
-    sed -E \
-      -e 's/\$\+commands\[[a-z]+\]/false/g' \
-      -e 's/^setopt interactivecomments$//g' \
-      "/.docker-rc.d/$1"
-  )
-}
+# _source_for_bash() {
+#   source <(
+#     sed -E \
+#       -e 's/\$\+commands\[[a-z]+\]/false/g' \
+#       -e 's/^setopt interactivecomments$//g' \
+#       "/.docker-rc.d/$1"
+#   )
+# }
 
-_source_for_bash gcloud/aliases.zsh
-_source_for_bash git/aliases.zsh
-_source_for_bash kubernetes/aliases.zsh
-_source_for_bash ruby/aliases.zsh
-_source_for_bash system/aliases.zsh
+# _source_for_bash gcloud/aliases.zsh
+# _source_for_bash git/aliases.zsh
+# _source_for_bash kubernetes/aliases.zsh
+# _source_for_bash ruby/aliases.zsh
+# _source_for_bash system/aliases.zsh
 
-export PATH="/.docker-rc.d/bin:$PATH"
+# export PATH="/.docker-rc.d/bin:$PATH"
 
-if [[ -z "$LOGGED_DOTFILES_LOADED" ]]; then
-  printf "\\e[1m\\e[32m%s\\e[0m\\n" "Dotfiles activated" >&2
+# if [[ -z "$LOGGED_DOTFILES_LOADED" ]]; then
+#   printf "\\e[1m\\e[32m%s\\e[0m\\n" "Dotfiles activated" >&2
 
-  # Stop recursive logging
-  export LOGGED_DOTFILES_LOADED=1
-fi
+#   # Stop recursive logging
+#   export LOGGED_DOTFILES_LOADED=1
+# fi
+
+# Currently enabled shortcuts
+source /.docker-rc.d/git/aliases.zsh
+source /.docker-rc.d/docker/aliases.zsh
+source /.docker-rc.d/greensync/aliases.zsh
+

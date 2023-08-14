@@ -2,6 +2,7 @@
 source ~/Code/dotfiles/git/aliases.zsh
 source ~/Code/dotfiles/docker/aliases.zsh
 source ~/Code/dotfiles/greensync/aliases.zsh
+source ~/Code/dotfiles/zsh/aliases.zsh
 
 # source ~/Code/dex-core/scripts/shell-utils/jq.sh
 # source ~/Code/dex-core/scripts/shell-utils/jwt.sh
@@ -17,3 +18,13 @@ if [ -f '/Users/jez/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jez/g
 
 # Initialise rbenv
 eval "$(rbenv init - zsh)"
+
+# Customise the prompt
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "%b"
+precmd() {
+    vcs_info
+}
+setopt prompt_subst
+PROMPT='%F{yellow}%n@%m %1~ ${vcs_info_msg_0_} %# %f'
