@@ -69,12 +69,11 @@ function wip {
 }
 
 function push_and_set_remote {
-  protected_branch='main'
-  current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+  branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
-  if [ $protected_branch = $current_branch ]
+  if [ $branch == "master" || $branch == "main" || $branch == "staging" || $branch == "prod-au" || $branch == "sandbox"]
   then
-    if read -q "choice?Do you really want to push to main? [y|n] "; then
+    if read -q "choice?Do you really want to push to $branch? [y|n] "; then
       git push -u origin HEAD
     else
       echo
