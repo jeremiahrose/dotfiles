@@ -48,12 +48,18 @@ function grh {
   log_and_run_command git reset --hard $args
 }
 
-function gp {
-  args="$@"
-  if [ -z "$1" ]; then
-    args="origin HEAD"
+function push_with_check {
+  branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
+  if [ "$branch" = "master" ] || [ "$branch" = "main" ] || [ "$branch" = "staging" ] || [ "$branch" = "prod-au" ] || [ "$branch" = "sandbox" ]
+  then
+    if read -q "choice?Do you really want to push to $branch? [y|n] "; then
+      git push $@
+    else
+      echo
+    fi
+  else
+    git push $@
   fi
-  log_and_run_command git push $args
 }
 
 function gsubs {
@@ -68,21 +74,6 @@ function wip {
     gp origin HEAD --no-verify
 }
 
-function push_and_set_remote {
-  branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
-
-  if [ $branch == "master" || $branch == "main" || $branch == "staging" || $branch == "prod-au" || $branch == "sandbox"]
-  then
-    if read -q "choice?Do you really want to push to $branch? [y|n] "; then
-      git push -u origin HEAD
-    else
-      echo
-    fi
-  else
-      git push -u origin HEAD
-  fi
-}
-
 # The rest of my fun git aliases
 # alias gl='git pull --prune'
 alias gl="git log --decorate --oneline --graph --all -n17"
@@ -92,14 +83,15 @@ alias glp='git log -p'
 alias gsh='git show'
 alias gf='git fetch'
 alias gfa='git fetch --all'
-alias gpfwl='git push --force-with-lease'
-alias gpf='gp origin HEAD --force-with-lease'
-alias gpu='push_and_set_remote' # Set upstream / track remote branch
-alias gpuf='gpu --force-with-lease'
-alias gpufn='gpu --force-with-lease --no-verify'
-alias gpun='gpu --no-verify'
-alias gps='gsubs git push staging HEAD:master && echo && gp staging HEAD:master'
-alias gpp='gsubs git push production HEAD:master && echo && gp production HEAD:master'
+alias gp='push_with_check origin HEAD'
+alias gpfwl='push_with_check --force-with-lease origin HEAD'
+# alias gpf='gp origin HEAD --force-with-lease'
+alias gpu='push_with_check -u origin HEAD'
+# alias gpuf='gpu --force-with-lease'
+# alias gpufn='gpu --force-with-lease --no-verify'
+# alias gpun='gpu --no-verify'
+# alias gps='gsubs git push staging HEAD:master && echo && gp staging HEAD:master'
+# alias gpp='gsubs git push production HEAD:master && echo && gp production HEAD:master'
 alias gpos='gp && echo && gps'
 alias gposp='gpos && echo && gpp'
 alias gd='git diff'
